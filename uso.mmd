@@ -1,31 +1,46 @@
-%%{init: {"theme":"neutral"}}%%
-graph LR
+flowchart LR
 
-    subgraph Sistema["Sistema do Restaurante"]
-        UC1((Fazer Pedido))
-        UC2((Processar Pagamento))
-        UC3((Acompanhar Pedido))
-        UC4((Gerenciar Cardapio))
-        UC5((Preparar Refeicao))
-        UC6((Receber Veiculo))
-        UC7((Estacionar Veiculo))
-        UC8((Devolver Veiculo))
+    Cliente["Cliente"]
+    Garcom["Garçom"]
+    Cozinheiro["Cozinheiro"]
+    Caixa["Caixa"]
+    Gerente["Gerente"]
+    Valet["Valet"]
+
+    subgraph Sistema["SISTEMA DO RESTAURANTE"]
+        direction TB
+
+        UC1(("Fazer Pedido"))
+        UC2(("Acompanhar Pedido"))
+        UC3(("Preparar Refeição"))
+        UC4(("Solicitar Conta"))
+        UC5(("Processar Pagamento"))
+        UC6(("Gerenciar Cardápio"))
+        UC7(("Receber Veículo"))
+        UC8(("Registrar Veículo"))
+        UC9(("Estacionar Veículo"))
+        UC10(("Localizar Veículo"))
+        UC11(("Devolver Veículo"))
     end
 
-    Cliente[Cliente] --> UC1
+    Cliente --> UC1
     Cliente --> UC2
-    Cliente --> UC3
-    Cliente --> UC6
-    Cliente --> UC8
+    Cliente --> UC4
+    Cliente --> UC5
+    Cliente --> UC7
+    Cliente --> UC11
 
-    Garcom[Garcom] --> UC1
+    Garcom --> UC1
+    Garcom --> UC4
 
-    Cozinheiro[Cozinheiro] --> UC5
+    Cozinheiro --> UC3
 
-    Caixa[Caixa] --> UC2
+    Caixa --> UC5
 
-    Gerente[Gerente] --> UC4
+    Gerente --> UC6
 
-    Vallet[Vallet] --> UC6
-    Vallet --> UC7
-    Vallet --> UC8
+    Valet --> UC7
+    Valet --> UC8
+    Valet --> UC9
+    Valet --> UC10
+    Valet --> UC11
