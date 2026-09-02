@@ -1,0 +1,31 @@
+%%{init: {"theme":"neutral"}}%%
+graph LR
+
+    subgraph Sistema["Sistema do Restaurante"]
+        UC1((Fazer Pedido))
+        UC2((Processar Pagamento))
+        UC3((Acompanhar Pedido))
+        UC4((Gerenciar Cardapio))
+        UC5((Preparar Refeicao))
+        UC6((Receber Veiculo))
+        UC7((Estacionar Veiculo))
+        UC8((Devolver Veiculo))
+    end
+
+    Cliente[Cliente] --> UC1
+    Cliente --> UC2
+    Cliente --> UC3
+    Cliente --> UC6
+    Cliente --> UC8
+
+    Garcom[Garcom] --> UC1
+
+    Cozinheiro[Cozinheiro] --> UC5
+
+    Caixa[Caixa] --> UC2
+
+    Gerente[Gerente] --> UC4
+
+    Vallet[Vallet] --> UC6
+    Vallet --> UC7
+    Vallet --> UC8

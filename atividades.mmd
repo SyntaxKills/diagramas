@@ -1,0 +1,43 @@
+%%{init: {"theme":"neutral"}}%%
+stateDiagram-v2
+
+    [*] --> ChegadaCliente
+
+    state "Cliente Chega ao Restaurante" as ChegadaCliente
+    ChegadaCliente --> ReceberVeiculo : Entrega o carro ao Vallet
+
+    state "Vallet Recebe o Veiculo" as ReceberVeiculo
+    ReceberVeiculo --> EstacionarVeiculo : Leva o carro
+
+    state "Vallet Estaciona o Veiculo" as EstacionarVeiculo
+    EstacionarVeiculo --> ClienteFazPedido : Cliente entra no restaurante
+
+    state "Cliente Faz o Pedido" as ClienteFazPedido
+    ClienteFazPedido --> PrepararRefeicao : Pedido enviado para cozinha
+
+    state "Cozinha Prepara Refeicao" as PrepararRefeicao
+    PrepararRefeicao --> EntregarMesa : Prato pronto
+
+    state "Garcom Entrega na Mesa" as EntregarMesa
+    EntregarMesa --> ClienteConsome : Servir cliente
+
+    state "Cliente Consome e Pede Conta" as ClienteConsome
+    ClienteConsome --> ProcessarPagamento : Solicitar fechamento
+
+    state "Processar Pagamento" as ProcessarPagamento
+    ProcessarPagamento --> ConfirmarPagamento : Pagamento
+
+    state "Pagamento Confirmado" as ConfirmarPagamento
+    ConfirmarPagamento --> SolicitarVeiculo : Cliente solicita o carro
+
+    state "Cliente Solicita o Veiculo" as SolicitarVeiculo
+    SolicitarVeiculo --> BuscarVeiculo : Vallet recebe solicitacao
+
+    state "Vallet Busca o Veiculo" as BuscarVeiculo
+    BuscarVeiculo --> EntregarVeiculo : Retorna com o carro
+
+    state "Vallet Entrega o Veiculo ao Cliente" as EntregarVeiculo
+    EntregarVeiculo --> ClienteSai : Cliente recebe o carro
+
+    state "Cliente Sai do Restaurante" as ClienteSai
+    ClienteSai --> [*]
