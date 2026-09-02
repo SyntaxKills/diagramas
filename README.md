@@ -214,3 +214,4 @@ O caso de uso descreve o processo pelo qual o cliente seleciona os itens dispon√
 cd /sdcard/
 git clone https://github.com/SyntaxKiils/diagramas.git
 cd diagramas
+bash run.sh
