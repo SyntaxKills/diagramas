@@ -1,7 +1,5 @@
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso apresenta os principais atores do restaurante e suas respectivas funcionalidades no sistema.
-
 ```mermaid
 flowchart LR
 
@@ -50,8 +48,6 @@ flowchart LR
 ```
 
 ## Diagrama de Atividades
-
-O diagrama abaixo representa o fluxo completo de atendimento do restaurante, desde a chegada do cliente até sua saída, incluindo o serviço de Valet, atendimento do garçom, preparação da refeição e processamento do pagamento.
 
 ```mermaid
 flowchart TB
@@ -150,32 +146,3 @@ flowchart TB
     C11 --> FIM
 ```
 
-### Uma observação sobre o conteúdo
-
-Eu faria **uma pequena alteração no Casos de Uso**: o `Cliente --> UC5` (**Processar Pagamento**) pode ser questionável dependendo do que o professor considera como "sistema". Se o **Caixa** é quem efetivamente processa o pagamento, pode ficar somente:
-
-```text
-Caixa --> UC5
-```
-
-e o cliente apenas:
-
-```text
-Cliente --> UC4
-```
-
-Isso deixa a responsabilidade mais coerente.
-
-No **Diagrama de Atividades**, por outro lado, o fluxo está bem mais completo agora, inclusive com:
-
-**Chegada → Valet → Pedido → Cozinha → Refeição → Conta → Pagamento → Valet → Saída.**
-
-E o bloco:
-
-```text
-Pagamento aprovado?
-       ↓
-   Sim / Não
-```
-
-também é importante, porque representa uma **decisão** real do processo.
