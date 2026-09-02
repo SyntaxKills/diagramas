@@ -205,8 +205,6 @@ O caso de uso descreve o processo pelo qual o cliente seleciona os itens dispon�
 - O pagamento aprovado é registrado no sistema.
 - O atendimento é finalizado após a confirmação do pagamento.
 
-## Execução
-
 ## Instalação
 
 ```bash
