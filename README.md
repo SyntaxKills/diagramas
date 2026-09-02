@@ -2,8 +2,15 @@ Diagramas do Sistema do Restaurante
 
 Diagrama de Casos de Uso
 
-%%{init: {"theme":"neutral"}}%%
-graph LR
+flowchart LR
+
+    Cliente[Cliente]
+    Garcom[Garçom]
+    Cozinheiro[Cozinheiro]
+    Caixa[Caixa]
+    Gerente[Gerente]
+    Valet[Valet]
+
     subgraph Sistema["Sistema do Restaurante"]
         UC1((Fazer Pedido))
         UC2((Acompanhar Pedido))
@@ -18,23 +25,23 @@ graph LR
         UC11((Devolver Veículo))
     end
 
-    Cliente[Cliente] --> UC1
+    Cliente --> UC1
     Cliente --> UC2
     Cliente --> UC4
     Cliente --> UC5
     Cliente --> UC10
     Cliente --> UC11
 
-    Garcom[Garçom] --> UC1
+    Garcom --> UC1
     Garcom --> UC4
 
-    Cozinheiro[Cozinheiro] --> UC3
+    Cozinheiro --> UC3
 
-    Caixa[Caixa] --> UC5
+    Caixa --> UC5
 
-    Gerente[Gerente] --> UC6
+    Gerente --> UC6
 
-    Valet[Valet] --> UC7
+    Valet --> UC7
     Valet --> UC8
     Valet --> UC9
     Valet --> UC10
@@ -42,63 +49,63 @@ graph LR
 
 Descrição
 
-O caso de uso descreve as principais interações entre os usuários e o sistema do restaurante, incluindo o registro e acompanhamento de pedidos, preparação das refeições, pagamento da conta, gerenciamento do cardápio e controle do estacionamento.
+O diagrama de casos de uso apresenta as principais interações entre os atores e o sistema do restaurante. Ele contempla o registro e acompanhamento de pedidos, preparação das refeições, solicitação e pagamento da conta, gerenciamento do cardápio e controle dos veículos no estacionamento.
 
 Atores
 
-- Cliente: realiza pedidos, acompanha o andamento, solicita a conta, efetua o pagamento e solicita o veículo.
-- Garçom: registra pedidos e auxilia no atendimento e na entrega da conta.
+- Cliente: realiza pedidos, acompanha o pedido, solicita a conta, realiza o pagamento e solicita o veículo.
+- Garçom: registra os pedidos, encaminha-os para a cozinha e entrega a conta.
 - Cozinheiro: recebe e prepara os pedidos.
-- Caixa: realiza o processamento e a confirmação dos pagamentos.
-- Gerente: gerencia os itens e informações do cardápio.
+- Caixa: processa e confirma os pagamentos.
+- Gerente: gerencia o cardápio.
 - Valet: recebe, registra, estaciona, localiza e devolve os veículos.
 
 Condições
 
-- O cliente deve estar com a mesa identificada ou devidamente associado ao atendimento.
-- O cardápio deve estar atualizado e disponível no sistema.
-- Os itens solicitados devem estar disponíveis para preparo.
-- O sistema deve estar disponível para registrar pedidos e pagamentos.
+- O cliente deve estar associado a uma mesa ou atendimento.
+- O cardápio deve estar atualizado e disponível.
+- Os itens solicitados devem estar disponíveis.
+- O sistema deve estar funcionando para registrar pedidos e pagamentos.
 
 Fluxo Principal
 
 - O cliente solicita o cardápio.
-- O sistema exibe os itens disponíveis por categoria.
-- O cliente seleciona os itens desejados e suas respectivas quantidades.
-- O sistema adiciona os itens ao pedido e calcula o valor total.
+- O sistema apresenta os itens disponíveis.
+- O cliente seleciona os itens e suas quantidades.
+- O sistema registra o pedido e calcula o valor.
 - O cliente confirma o pedido.
 - O garçom registra e encaminha o pedido para a cozinha.
-- A cozinha recebe e prepara a refeição.
-- Após o preparo, o garçom recebe e serve a refeição ao cliente.
+- A cozinha prepara a refeição.
+- O garçom recebe e serve a refeição.
 - O cliente solicita a conta.
-- O sistema calcula o valor total da conta.
+- O sistema calcula o valor total.
 - O cliente realiza o pagamento.
-- O sistema processa e confirma o pagamento.
-- O sistema atualiza o status do pedido e registra a conclusão do atendimento.
+- O caixa processa o pagamento.
+- O sistema confirma o pagamento e finaliza o atendimento.
 
 Fluxos Alternativos
 
-- Item indisponível: caso um item selecionado esteja indisponível, o sistema informa o cliente e solicita a remoção ou substituição do item antes da confirmação do pedido.
-- Falha no pagamento: caso o pagamento seja recusado, o sistema informa o cliente e permite uma nova tentativa utilizando outra forma de pagamento.
-- Veículo não localizado: caso o veículo não seja encontrado imediatamente, o Valet realiza uma nova consulta no registro do estacionamento.
+- Item indisponível: o sistema informa que o item está indisponível e solicita sua remoção ou substituição.
+- Falha no pagamento: o sistema informa a falha e permite uma nova tentativa com outra forma de pagamento.
+- Veículo não localizado: o Valet realiza uma nova consulta no registro do estacionamento.
 
 Pós-condições
 
-- O pedido é registrado no banco de dados.
-- O pedido recebe o status correspondente ao seu andamento.
-- A comanda da cozinha é gerada para os pedidos confirmados.
-- O pagamento é registrado após sua aprovação.
+- O pedido fica registrado no sistema.
+- A comanda da cozinha é gerada.
+- O status do pedido é atualizado conforme seu andamento.
+- O pagamento aprovado é registrado.
 - O veículo é atualizado no sistema após sua devolução.
 
 ---
 
 Diagrama de Atividades
 
-%%{init: {"theme":"neutral"}}%%
 flowchart TB
-    INICIO((INÍCIO))
 
-    subgraph CLIENTE["CLIENTE"]
+    INICIO((Início))
+
+    subgraph CLIENTE["Cliente"]
         C1["Chega ao restaurante"]
         C2["Entrega o veículo ao Valet"]
         C3["Entra no restaurante"]
@@ -112,7 +119,7 @@ flowchart TB
         C11["Sai do restaurante"]
     end
 
-    subgraph VALET["VALET"]
+    subgraph VALET["Valet"]
         V1["Recebe o veículo"]
         V2["Registra o veículo"]
         V3["Estaciona o veículo"]
@@ -122,7 +129,7 @@ flowchart TB
         V7["Entrega o veículo"]
     end
 
-    subgraph GARCOM["GARÇOM"]
+    subgraph GARCOM["Garçom"]
         G1["Recebe o pedido"]
         G2["Registra o pedido"]
         G3["Envia o pedido para a cozinha"]
@@ -131,14 +138,14 @@ flowchart TB
         G6["Entrega a conta"]
     end
 
-    subgraph COZINHA["COZINHA"]
+    subgraph COZINHA["Cozinha"]
         K1["Recebe o pedido"]
         K2["Prepara a refeição"]
         K3["Finaliza o prato"]
         K4["Disponibiliza a refeição"]
     end
 
-    subgraph CAIXA["CAIXA"]
+    subgraph CAIXA["Caixa"]
         P1["Calcula o valor da conta"]
         P2["Processa o pagamento"]
         D1{"Pagamento aprovado?"}
@@ -146,7 +153,7 @@ flowchart TB
         P4["Solicita nova tentativa"]
     end
 
-    FIM((FIM))
+    FIM((Fim))
 
     INICIO --> C1
     C1 --> C2
@@ -191,4 +198,4 @@ flowchart TB
 
 Descrição do Diagrama de Atividades
 
-O diagrama representa o fluxo completo de atendimento no restaurante, desde a chegada do cliente até sua saída. O processo envolve o atendimento do garçom, o preparo da refeição pela cozinha, o processamento do pagamento pelo caixa e o controle do veículo pelo serviço de Valet.
+O diagrama de atividades representa o fluxo completo de atendimento do restaurante, desde a chegada do cliente até sua saída. O processo envolve o serviço de Valet, o atendimento do garçom, o preparo da refeição pela cozinha e o processamento do pagamento pelo caixa.
