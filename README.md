@@ -207,11 +207,11 @@ O caso de uso descreve o processo pelo qual o cliente seleciona os itens dispon�
 
 ## Execução
 
-## Execução
+## Instalação
 
-1. Instalação:
 ```bash
 cd /sdcard/
 git clone https://github.com/SyntaxKiils/diagramas.git
 cd diagramas
 bash run.sh
+
