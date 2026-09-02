@@ -204,3 +204,13 @@ O caso de uso descreve o processo pelo qual o cliente seleciona os itens dispon�
 - O status do pedido é atualizado conforme seu andamento.
 - O pagamento aprovado é registrado no sistema.
 - O atendimento é finalizado após a confirmação do pagamento.
+
+## Execução
+
+## Execução
+
+1. Instalação:
+```bash
+cd /sdcard/
+git clone https://github.com/SyntaxKiils/diagramas.git
+cd diagramas
