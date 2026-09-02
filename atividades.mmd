@@ -1,5 +1,5 @@
+%%{init: {"theme":"neutral"}}%%
 flowchart TB
-
     INICIO((INÍCIO))
 
     subgraph CLIENTE["CLIENTE"]
@@ -18,12 +18,12 @@ flowchart TB
 
     subgraph VALET["VALET"]
         V1["Recebe o veículo"]
-        V2["Registra/identifica o veículo"]
+        V2["Registra o veículo"]
         V3["Estaciona o veículo"]
         V4["Aguarda solicitação"]
         V5["Localiza o veículo"]
-        V6["Retira o veículo do estacionamento"]
-        V7["Entrega o veículo ao cliente"]
+        V6["Retira o veículo"]
+        V7["Entrega o veículo"]
     end
 
     subgraph GARCOM["GARÇOM"]
@@ -47,48 +47,17 @@ flowchart TB
         P2["Processa o pagamento"]
         D1{"Pagamento aprovado?"}
         P3["Confirma o pagamento"]
-        P4["Solicita nova tentativa de pagamento"]
+        P4["Solicita nova tentativa"]
     end
 
     FIM((FIM))
 
     INICIO --> C1
-    C1 --> C2
-    C2 --> V1
-    V1 --> V2
-    V2 --> V3
-    V3 --> C3
-
-    C3 --> C4
-    C4 --> G1
-    G1 --> G2
-    G2 --> G3
-    G3 --> K1
-
-    K1 --> K2
-    K2 --> K3
-    K3 --> K4
-    K4 --> G4
-    G4 --> G5
-    G5 --> C5
-
-    C5 --> C6
-    C6 --> C7
-    C7 --> G6
-    G6 --> P1
-    P1 --> C8
-    C8 --> P2
-    P2 --> D1
-
+    C1 --> C2 --> V1 --> V2 --> V3 --> C3
+    C3 --> C4 --> G1 --> G2 --> G3 --> K1
+    K1 --> K2 --> K3 --> K4 --> G4 --> G5 --> C5
+    C5 --> C6 --> C7 --> G6 --> P1 --> C8 --> P2 --> D1
     D1 -->|Sim| P3
     D1 -->|Não| P4
     P4 --> C8
-
-    P3 --> C9
-    C9 --> V4
-    V4 --> V5
-    V5 --> V6
-    V6 --> V7
-    V7 --> C10
-    C10 --> C11
-    C11 --> FIM
+    P3 --> C9 --> V4 --> V5 --> V6 --> V7 --> C10 --> C11 --> FIM
