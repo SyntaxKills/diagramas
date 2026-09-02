@@ -1,5 +1,7 @@
 ## Diagrama de Casos de Uso
 
+O diagrama de casos de uso apresenta os principais atores do restaurante e suas respectivas funcionalidades no sistema.
+
 ```mermaid
 flowchart LR
 
@@ -35,6 +37,7 @@ flowchart LR
 
     Garcom --> UC1
     Garcom --> UC4
+
     Cozinheiro --> UC3
     Caixa --> UC5
     Gerente --> UC6
@@ -44,3 +47,135 @@ flowchart LR
     Valet --> UC9
     Valet --> UC10
     Valet --> UC11
+```
+
+## Diagrama de Atividades
+
+O diagrama abaixo representa o fluxo completo de atendimento do restaurante, desde a chegada do cliente até sua saída, incluindo o serviço de Valet, atendimento do garçom, preparação da refeição e processamento do pagamento.
+
+```mermaid
+flowchart TB
+
+    INICIO((INÍCIO))
+
+    subgraph CLIENTE["CLIENTE"]
+        C1["Chega ao restaurante"]
+        C2["Entrega o veículo ao Valet"]
+        C3["Entra no restaurante"]
+        C4["Realiza o pedido"]
+        C5["Aguarda a refeição"]
+        C6["Consome a refeição"]
+        C7["Solicita a conta"]
+        C8["Realiza o pagamento"]
+        C9["Solicita o veículo"]
+        C10["Recebe o veículo"]
+        C11["Sai do restaurante"]
+    end
+
+    subgraph VALET["VALET"]
+        V1["Recebe o veículo"]
+        V2["Registra o veículo"]
+        V3["Estaciona o veículo"]
+        V4["Aguarda solicitação"]
+        V5["Localiza o veículo"]
+        V6["Retira o veículo"]
+        V7["Entrega o veículo"]
+    end
+
+    subgraph GARCOM["GARÇOM"]
+        G1["Recebe o pedido"]
+        G2["Registra o pedido"]
+        G3["Envia o pedido para a cozinha"]
+        G4["Recebe a refeição pronta"]
+        G5["Serve o cliente"]
+        G6["Entrega a conta"]
+    end
+
+    subgraph COZINHA["COZINHA"]
+        K1["Recebe o pedido"]
+        K2["Prepara a refeição"]
+        K3["Finaliza o prato"]
+        K4["Disponibiliza a refeição"]
+    end
+
+    subgraph CAIXA["CAIXA"]
+        P1["Calcula o valor da conta"]
+        P2["Processa o pagamento"]
+        D1{"Pagamento aprovado?"}
+        P3["Confirma o pagamento"]
+        P4["Solicita nova tentativa"]
+    end
+
+    FIM((FIM))
+
+    INICIO --> C1
+    C1 --> C2
+    C2 --> V1
+    V1 --> V2
+    V2 --> V3
+    V3 --> C3
+
+    C3 --> C4
+    C4 --> G1
+    G1 --> G2
+    G2 --> G3
+    G3 --> K1
+
+    K1 --> K2
+    K2 --> K3
+    K3 --> K4
+    K4 --> G4
+    G4 --> G5
+    G5 --> C5
+
+    C5 --> C6
+    C6 --> C7
+    C7 --> G6
+    G6 --> P1
+    P1 --> C8
+    C8 --> P2
+    P2 --> D1
+
+    D1 -->|Sim| P3
+    D1 -->|Não| P4
+    P4 --> C8
+
+    P3 --> C9
+    C9 --> V4
+    V4 --> V5
+    V5 --> V6
+    V6 --> V7
+    V7 --> C10
+    C10 --> C11
+    C11 --> FIM
+```
+
+### Uma observação sobre o conteúdo
+
+Eu faria **uma pequena alteração no Casos de Uso**: o `Cliente --> UC5` (**Processar Pagamento**) pode ser questionável dependendo do que o professor considera como "sistema". Se o **Caixa** é quem efetivamente processa o pagamento, pode ficar somente:
+
+```text
+Caixa --> UC5
+```
+
+e o cliente apenas:
+
+```text
+Cliente --> UC4
+```
+
+Isso deixa a responsabilidade mais coerente.
+
+No **Diagrama de Atividades**, por outro lado, o fluxo está bem mais completo agora, inclusive com:
+
+**Chegada → Valet → Pedido → Cozinha → Refeição → Conta → Pagamento → Valet → Saída.**
+
+E o bloco:
+
+```text
+Pagamento aprovado?
+       ↓
+   Sim / Não
+```
+
+também é importante, porque representa uma **decisão** real do processo.
