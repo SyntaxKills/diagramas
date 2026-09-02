@@ -1,8 +1,7 @@
-# Diagramas do Sistema do Restaurante
+Diagramas do Sistema do Restaurante
 
-## Diagrama de Casos de Uso
+Diagrama de Casos de Uso
 
-```mermaid
 %%{init: {"theme":"neutral"}}%%
 graph LR
     subgraph Sistema["Sistema do Restaurante"]
@@ -23,13 +22,16 @@ graph LR
     Cliente --> UC2
     Cliente --> UC4
     Cliente --> UC5
-    Cliente --> UC7
+    Cliente --> UC10
     Cliente --> UC11
 
     Garcom[Garçom] --> UC1
     Garcom --> UC4
+
     Cozinheiro[Cozinheiro] --> UC3
+
     Caixa[Caixa] --> UC5
+
     Gerente[Gerente] --> UC6
 
     Valet[Valet] --> UC7
@@ -37,11 +39,61 @@ graph LR
     Valet --> UC9
     Valet --> UC10
     Valet --> UC11
-```
 
-## Diagrama de Atividades
+Descrição
 
-```mermaid
+O caso de uso descreve as principais interações entre os usuários e o sistema do restaurante, incluindo o registro e acompanhamento de pedidos, preparação das refeições, pagamento da conta, gerenciamento do cardápio e controle do estacionamento.
+
+Atores
+
+- Cliente: realiza pedidos, acompanha o andamento, solicita a conta, efetua o pagamento e solicita o veículo.
+- Garçom: registra pedidos e auxilia no atendimento e na entrega da conta.
+- Cozinheiro: recebe e prepara os pedidos.
+- Caixa: realiza o processamento e a confirmação dos pagamentos.
+- Gerente: gerencia os itens e informações do cardápio.
+- Valet: recebe, registra, estaciona, localiza e devolve os veículos.
+
+Condições
+
+- O cliente deve estar com a mesa identificada ou devidamente associado ao atendimento.
+- O cardápio deve estar atualizado e disponível no sistema.
+- Os itens solicitados devem estar disponíveis para preparo.
+- O sistema deve estar disponível para registrar pedidos e pagamentos.
+
+Fluxo Principal
+
+- O cliente solicita o cardápio.
+- O sistema exibe os itens disponíveis por categoria.
+- O cliente seleciona os itens desejados e suas respectivas quantidades.
+- O sistema adiciona os itens ao pedido e calcula o valor total.
+- O cliente confirma o pedido.
+- O garçom registra e encaminha o pedido para a cozinha.
+- A cozinha recebe e prepara a refeição.
+- Após o preparo, o garçom recebe e serve a refeição ao cliente.
+- O cliente solicita a conta.
+- O sistema calcula o valor total da conta.
+- O cliente realiza o pagamento.
+- O sistema processa e confirma o pagamento.
+- O sistema atualiza o status do pedido e registra a conclusão do atendimento.
+
+Fluxos Alternativos
+
+- Item indisponível: caso um item selecionado esteja indisponível, o sistema informa o cliente e solicita a remoção ou substituição do item antes da confirmação do pedido.
+- Falha no pagamento: caso o pagamento seja recusado, o sistema informa o cliente e permite uma nova tentativa utilizando outra forma de pagamento.
+- Veículo não localizado: caso o veículo não seja encontrado imediatamente, o Valet realiza uma nova consulta no registro do estacionamento.
+
+Pós-condições
+
+- O pedido é registrado no banco de dados.
+- O pedido recebe o status correspondente ao seu andamento.
+- A comanda da cozinha é gerada para os pedidos confirmados.
+- O pagamento é registrado após sua aprovação.
+- O veículo é atualizado no sistema após sua devolução.
+
+---
+
+Diagrama de Atividades
+
 %%{init: {"theme":"neutral"}}%%
 flowchart TB
     INICIO((INÍCIO))
@@ -97,12 +149,46 @@ flowchart TB
     FIM((FIM))
 
     INICIO --> C1
-    C1 --> C2 --> V1 --> V2 --> V3 --> C3
-    C3 --> C4 --> G1 --> G2 --> G3 --> K1
-    K1 --> K2 --> K3 --> K4 --> G4 --> G5 --> C5
-    C5 --> C6 --> C7 --> G6 --> P1 --> C8 --> P2 --> D1
+    C1 --> C2
+    C2 --> V1
+    V1 --> V2
+    V2 --> V3
+    V3 --> C3
+
+    C3 --> C4
+    C4 --> G1
+    G1 --> G2
+    G2 --> G3
+    G3 --> K1
+
+    K1 --> K2
+    K2 --> K3
+    K3 --> K4
+    K4 --> G4
+    G4 --> G5
+    G5 --> C5
+
+    C5 --> C6
+    C6 --> C7
+    C7 --> G6
+    G6 --> P1
+    P1 --> C8
+    C8 --> P2
+    P2 --> D1
+
     D1 -->|Sim| P3
     D1 -->|Não| P4
     P4 --> C8
-    P3 --> C9 --> V4 --> V5 --> V6 --> V7 --> C10 --> C11 --> FIM
-```
+
+    P3 --> C9
+    C9 --> V4
+    V4 --> V5
+    V5 --> V6
+    V6 --> V7
+    V7 --> C10
+    C10 --> C11
+    C11 --> FIM
+
+Descrição do Diagrama de Atividades
+
+O diagrama representa o fluxo completo de atendimento no restaurante, desde a chegada do cliente até sua saída. O processo envolve o atendimento do garçom, o preparo da refeição pela cozinha, o processamento do pagamento pelo caixa e o controle do veículo pelo serviço de Valet.
